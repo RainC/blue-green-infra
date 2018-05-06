@@ -3,13 +3,13 @@ class Deploy < BaseAppController
         p "Deployment Controller Initalized"
     end
 
-    def deploy
+    def do_deploy()
         # remove green container
         # new green container
 
         module_load("cli")
-        m = Cli.new("rubyrain.server","rubyrain","33")
-        # m.deploy_app_continaer
+        m = Cli.new(@host,@user,@pass)
+        m.deploy_app_continaer("sampleapp")
     end
 
     def publish
@@ -17,7 +17,9 @@ class Deploy < BaseAppController
     end 
 
 
-    def initialize
-        self.deploy
+    def initialize(host,user,pass)
+        @host = host
+        @user = user
+        @pass = pass
     end
 end 

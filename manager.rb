@@ -1,6 +1,7 @@
 require 'net/ssh'
 require 'awesome_print'
 require 'abstract_method'
+require 'dotenv/load' 
 
 class ModuleLoadError < StandardError
     def initialize(msg="Module/Controller Not found.")
@@ -14,7 +15,7 @@ class BaseAppController
     def module_load(module_name)
         p "Module Load Request - #{module_name}"
         require "#{File.dirname(File.realpath(__FILE__))}/lib/module/#{module_name}.rb"
-    end
+    end 
 end
 
 class Manager
@@ -22,7 +23,7 @@ class Manager
         self.load("module","init")
         self.load("initializer","argument_helper")
         options = ARGV
-        ArgumentHelper.new(options, self)
+        ArgumentHelper.new(options, self, ENV)
     end
 
     def load(type,name)
