@@ -17,7 +17,8 @@ class ArgumentHelper
         end
         if options[0] == "publish"
             if m.load("controller","publish") == true
-                Publish.new
+                publish = Publish.new(env["server_name"], env["server_user"], env["server_pass"]) 
+                publish.switch() 
             else
                 raise ModuleLoadError
             end
