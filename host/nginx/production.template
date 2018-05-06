@@ -1,0 +1,16 @@
+upstream active {
+    server ${ACTIVE}:80;
+}
+upstream standby {
+    server ${STANDBY}:80;
+}
+
+server {
+    location / {
+        proxy_pass http://active;
+    }
+    location /stage {
+        rewrite ^/stage/(.*)  /$1 break;
+        proxy_pass http://standby;
+    }
+}
