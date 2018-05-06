@@ -40,7 +40,9 @@ class Cli < BaseAppController
         self.connect_server(s)
     end
     def switch_container
-        s = ""
+        # Auto Switch from LB Container
+        s = "docker exec -it front_nginx /etc/nginx/switch"
+        self.connect_server(s)
     end
 
 
