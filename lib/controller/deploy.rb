@@ -11,10 +11,11 @@ class Deploy < BaseAppController
         module_load("cli")
         m = Cli.new(@host,@user,@pass)
         if init == true
-            m.deploy_app_container_init("sampleapp")
+            m.deploy_app_container_init("sampleapp") # Blue/Green Deploy for Lb
+            m.deploy_loadbalancer() # LB Deploy
         else
-            m.deploy_app_container("sampleapp")
-        end 
+            m.deploy_app_container("sampleapp") # Green Deploy
+        end
     end
 
     def do_deploy_green
