@@ -3,7 +3,7 @@ class ArgumentHelper
         if options[0] == "deploy"
             if m.load("controller","deploy") == true
                 
-                if options[1] == "loadbalancer"
+                if options[1] == "loadbalancer" 
                     deploy = Deploy.new(env["server_name"], env["server_user"], env["server_pass"]) 
                     deploy.do_deploy_lb() # must be prepared Blue/Green container 
                 else
