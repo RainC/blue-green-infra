@@ -24,7 +24,7 @@ class Cli < BaseAppController
     end
 
     def deploy_app_continaer(app)
-        s = "cd /home/rubyrain/infra/app/#{app} ; git checkout master -f ; git pull ;  docker build -t app_image . ; docker run -itd app_image --name app_container_green"
+        s = "cd /home/rubyrain/infra/app/#{app} ; git checkout master -f ; git pull ;  docker build -t app_image . ; docker run -itd app_image --host green"
         self.connect_server(s)
     end
 
