@@ -2,8 +2,9 @@ class ArgumentHelper
     def initialize(options, m, env)
         if options[0] == "deploy"
             if m.load("controller","deploy") == true
-                deploy = Deploy.new(env["server_name"], env["server_user"], env["server_pass"])
-                deploy.do_deploy()
+                deploy = Deploy.new(env["server_name"], env["server_user"], env["server_pass"]) 
+                deploy_opt = options[1]
+                deploy.do_deploy(deploy_opt)
             else
                 raise ModuleLoadError
             end
