@@ -31,7 +31,7 @@ class Cli < BaseAppController
         self.connect_server(s)
     end
     def deploy_loadbalancer()
-        s = "cd /home/rubyrain/infra/host/nginx/ ; git checkout master -f ; git pull ; docker build -t nginx_lb . ; docker rm -f  front_nginx ; docker run -itd -e 'ACTIVE=blue' -e 'STANDBY=green' --network base_network --name front_nginx --hostname front_lb nginx_lb"
+        s = "cd /home/rubyrain/infra/host/nginx/ ; git checkout master -f ; git pull ; docker build -t nginx_lb . ; docker rm -f  front_nginx ; docker run -itd -e 'ACTIVE=blue' -e 'STANDBY=green' --network base_network --name front_nginx --hostname front_lb nginx_lb envsubst < /etc/nginx/conf.d/production.template > /etc/nginx/conf.d/default.conf && nginx -g 'daemon off;"
         self.connect_server(s)
     end
     
