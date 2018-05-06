@@ -65,3 +65,17 @@ Reloading nginx: nginx
 .
 rubyrain@DESKTOP-VT2AITM:/mnt/c/Users/rainc/Development/infra$
 ```
+
+# Blue Container Access
+```
+http://Your-Production-Domain
+```
+
+# Green Container Access
+```
+http://Your-Producion-Domain/stage/{URI..}
+```
+
+# Status
+- Now Developing , Don't use this solution. 
+- it have Deployment issues* with blue/green detection.
