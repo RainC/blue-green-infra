@@ -35,8 +35,33 @@ rubyrain@DESKTOP-VT2AITM:/mnt/c/Users/rainc/Development/infra$ ruby manager.rb  
 "Module Load - argument_helper"
 "-------------------------"
 "Cli options"
+"ruby manager.rb deploy init"
 "ruby manager.rb deploy"
 "ruby manager.rb publish"
 rubyrain@DESKTOP-VT2AITM:/mnt/c/Users/rainc/Development/infra$
 ```
 
+# Usage - Green/Blue Switching
+```
+rubyrain@DESKTOP-VT2AITM:/mnt/c/Users/rainc/Development/infra$ ruby manager.rb publish
+"Module Load - init"
+"Module Load - argument_helper"
+"Module Load - publish"
+"Switching Process.."
+"Module Load Request - cli"
+Already on 'master'
+Already up-to-date.
+Reloading nginx: nginx
+.
+rubyrain@DESKTOP-VT2AITM:/mnt/c/Users/rainc/Development/infra$ ruby manager.rb publish
+"Module Load - init"
+"Module Load - argument_helper"
+"Module Load - publish"
+"Switching Process.."
+"Module Load Request - cli"
+Already on 'master'
+Already up-to-date.
+Reloading nginx: nginx
+.
+rubyrain@DESKTOP-VT2AITM:/mnt/c/Users/rainc/Development/infra$
+```
