@@ -41,7 +41,7 @@ class Cli < BaseAppController
     end
     def switch_container
         # Auto Switch from LB Container
-        s = "docker exec front_nginx /etc/nginx/switch"
+        s = "cd /home/rubyrain/infra/host/nginx/ ; git checkout master -f ; git pull ;docker exec front_nginx bash -c '/etc/nginx/switch'"
         self.connect_server(s)
     end
 
