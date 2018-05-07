@@ -1,4 +1,4 @@
-class Cli < BaseAppController 
+class Cli < BaseAppModule 
     def connect_server(join_deploy)
         begin
             ssh = Net::SSH.start(@server_host, @server_user, :password => @server_pass) 

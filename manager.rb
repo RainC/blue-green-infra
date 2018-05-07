@@ -3,12 +3,17 @@ require 'awesome_print'
 require 'abstract_method'
 require 'dotenv/load' 
 
-class ModuleLoadError < StandardError
-    def initialize(msg="Module/Controller Not found.")
-        super(msg)
+class GeneralLoadError < StandardError
+    def initialize(msg="General Error")
+        set_msg = "message :: #{msg}"
+        super(msg )
     end
 end
 
+
+class BaseAppModule
+    abstract_method :initialize
+end
 
 class BaseAppController
     abstract_method :initialize
@@ -20,25 +25,26 @@ end
 
 class Manager
     def initialize
-        self.load("module","init")
+        self.load("module","cli")
         self.load("initializer","argument_helper")
         options = ARGV
         ArgumentHelper.new(options, self, ENV)
     end
 
     def load(type,name)
-        begin
-            fileload(type,name)
-            return true
-        rescue LoadError => e
-            return false
-        end
+        fileload(type,name)
     end
 
     private
     def fileload(type,name)
-        p "Module Load - #{name}"
-        require "#{File.dirname(File.realpath(__FILE__))}/lib/#{type}/#{name}.rb"
+        begin 
+            require "#{File.dirname(File.realpath(__FILE__))}/lib/#{type}/#{name}.rb"
+        rescue LoadError => e 
+            raise GeneralLoadError, "#{type} load Error - '#{name}'"
+            return false
+        end
+        p "#{type} - #{name} Loaded"
+        return true
     end
 end  
 

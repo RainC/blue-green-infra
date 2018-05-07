@@ -1,4 +1,4 @@
-class Checker < BaseAppController
+class Checker < BaseAppModule
     
 end
 # Docker Installed check
