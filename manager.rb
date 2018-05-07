@@ -25,7 +25,7 @@ end
 
 class Manager
     def initialize
-        self.load("module","cli")
+        self.load("module","command")
         self.load("initializer","argument_helper")
         options = ARGV
         ArgumentHelper.new(options, self, ENV)

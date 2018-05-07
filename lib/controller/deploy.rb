@@ -8,7 +8,7 @@ class Deploy < BaseAppController
         # new green container
         # if init process, make blue, green container 
 
-        module_load("cli")
+        module_load("command")
         m = Cli.new(@host,@user,@pass)
         if init == "init" 
             p "Deploy init .. - Network "
@@ -25,7 +25,7 @@ class Deploy < BaseAppController
     def do_deploy_green
 
         p "Deploy Green container.. "
-        module_load("cli")
+        module_load("command")
         m = Cli.new(@host,@user,@pass)
         m.deploy_app_container("sampleapp")
     end 
@@ -34,7 +34,7 @@ class Deploy < BaseAppController
     def do_deploy_lb()
         # LB init Process
         p "Deploy LB.. "
-        module_load("cli")
+        module_load("command")
         m = Cli.new(@host,@user,@pass)
         m.deploy_loadbalancer()
     end
