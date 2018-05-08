@@ -42,7 +42,7 @@ class Cli < BaseAppModule
     end
     def switch_container
         # Auto Switch from LB Container
-        container_label_switch = "if [[ $(cat /etc/env | grep 'green') = 'green' ]]; then echo 'blue' > /etc/env ; else echo 'green' > /etc/env ;fi"
+        container_label_switch = "bash -c 'if [[ $(cat /etc/env | grep \"green\") = \"green\" ]]; then echo blue > /etc/env ; else echo green > /etc/env ;fi'"
         s = "cd /home/rubyrain/infra/host/nginx/ ; git checkout master -f ; docker exec blue #{container_label_switch} ; docker exec green #{container_label_switch} ;  git pull ;docker exec front_nginx bash -c '/etc/nginx/switch'"
         self.connect_server(s)
     end
