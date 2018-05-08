@@ -32,7 +32,7 @@ class Cli < BaseAppModule
         self.connect_server(s)
     end
     def deploy_loadbalancer()
-        s = "cd /home/rubyrain/infra/host/nginx/ ; git checkout master -f ; git pull ; docker build -t nginx_lb . ; docker rm -f  front_nginx ; docker run -itd -e 'ACTIVE=blue' -e 'STANDBY=green' --network base_network --name front_nginx -p 80:80 --hostname front_lb nginx_lb bash -c \"envsubst '$$ACTIVE $$STANDBY' < /etc/nginx/conf.d/production.template > /etc/nginx/conf.d/default.conf && nginx -g 'daemon off;'\""
+        s = "cd /home/rubyrain/infra/host/nginx/ ; git checkout master -f ; git pull ; docker build -t nginx_lb . ; docker rm -f  front_nginx ; docker run -itd -e 'ACTIVE=blue' -e 'STANDBY=green' --network base_network --name front_nginx -p 80:80 --hostname front_lb nginx_lb bash -c \"envsubst '$$ACTIVE $$STANDBY' < /etc/nginx/conf.d/production.template > /etc/nginx/conf.d/default.conf && cat /etc/nginx/conf.d/default.conf && nginx -g 'daemon off;'\""
         self.connect_server(s)
     end
     
