@@ -8,13 +8,10 @@ upstream standby {
 server {
     location / {
         proxy_pass http://active;
-        add_header X-upstream_addr $upstream_addr;
-        add_header X-active $active;
     }
     location /stage {
         rewrite ^/stage/(.*)  /$1 break;
         add_header X-upstream_addr $upstream_addr;
-        add_header X-active $active;
         proxy_pass http://standby;
     }
 }
