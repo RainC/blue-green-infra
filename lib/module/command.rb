@@ -32,7 +32,7 @@ class Cli < BaseAppModule
         self.connect_server(s)
     end
     def deploy_loadbalancer()
-        s = "cd /home/rubyrain/infra/host/nginx/ ; git checkout master -f ; git pull ; docker build -t nginx_lb . ; docker rm -f  front_nginx ; docker run -itd -e 'ACTIVE=blue' -e 'STANDBY=green' --network base_network --name front_nginx -p 80:80 --hostname front_lb nginx_lb bash -c \"envsubst < /etc/nginx/conf.d/production.template > /etc/nginx/conf.d/default.conf && nginx -g 'daemon off;'\""
+        s = "cd /home/rubyrain/infra/host/nginx/ ; git checkout master -f ; git pull ; docker build -t nginx_lb . ; docker rm -f  front_nginx ; docker run -itd -e 'ACTIVE=blue' -e 'STANDBY=green' --network base_network --name front_nginx -p 80:80 --hostname front_lb nginx_lb bash -c \"envsubst '\$ACTIVE \$STANDBY' < /etc/nginx/conf.d/production.template > /etc/nginx/conf.d/default.conf && nginx -g 'daemon off;'\""
         self.connect_server(s)
     end
     
@@ -50,7 +50,7 @@ class Cli < BaseAppModule
         centos_install_docker = "sudo yum install -y yum-utils device-mapper-persistent-data lvm2;sudo yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo ; sudo yum install docker-ce -y ; sudo systemctl start docker ; sudo systemctl enable docker"
         ubuntu_install_docker = "sudo apt-get update -y ; sudo apt-get install apt-transport-https ca-certificates curl software-properties-common; curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -; sudo apt-key fingerprint 0EBFCD88; sudo add-apt-repository \"deb [arch=amd64] https://download.docker.com/linux/ubuntu  $(lsb_release -cs) stable\"; sudo apt-get update ; sudo apt-get install docker-ce -y ; sudo usermod -aG docker $USER "
         selection = [centos_install_docker, ubuntu_install_docker]
-        
+
         s = "cd #{path} ; git clone https://github.com/rainc/infra; #{selection[os]}"
         self.connect_server(s)
     end
