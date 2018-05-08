@@ -15,7 +15,7 @@ class Deploy < BaseAppController
             m.construct_network()
             p "Deploy init process.. "
             m.deploy_app_container_init("sampleapp") # Blue/Green Deploy for Lb
-            p "Deploy lb.. "
+            p "Deploy loadbalancer.. "
             m.deploy_loadbalancer() # LB Deploy
         else
             m.deploy_app_container("sampleapp") # Green Deploy

@@ -26,6 +26,7 @@ class Cli < BaseAppModule
         s = "cd /home/rubyrain/infra/app/#{app} ; git checkout master -f ; git pull ;  docker build -t app_image . ; docker rm -f green ;  docker run -itd --network base_network --name blue --hostname blue app_image; docker run --network base_network -itd --name green --hostname green app_image"
         self.connect_server(s)
     end
+
     def deploy_app_container(app)
         s = "cd /home/rubyrain/infra/app/#{app} ; git checkout master -f ; git pull ;  docker build -t app_image . ; docker rm -f green ;  docker run -itd --network base_network --name green --hostname green app_image"
         self.connect_server(s)
@@ -45,6 +46,14 @@ class Cli < BaseAppModule
         self.connect_server(s)
     end
 
+    def install_infrastructure(path, os)
+        centos_install_docker = "sudo yum install -y yum-utils device-mapper-persistent-data lvm2;sudo yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo ; sudo yum install docker-ce -y ; sudo systemctl start docker ; sudo systemctl enable docker"
+        ubuntu_install_docker = "sudo apt-get update -y ; sudo apt-get install apt-transport-https ca-certificates curl software-properties-common; curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -; sudo apt-key fingerprint 0EBFCD88; sudo add-apt-repository \"deb [arch=amd64] https://download.docker.com/linux/ubuntu  $(lsb_release -cs) stable\"; sudo apt-get update ; sudo apt-get install docker-ce -y ; sudo usermod -aG docker $USER "
+        selection = [centos_install_docker, ubuntu_install_docker]
+        
+        s = "cd #{path} ; git clone https://github.com/rainc/infra; #{selection[os]}"
+        self.connect_server(s)
+    end
 
     def initialize(host,user,pass)
         @server_host = host

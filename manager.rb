@@ -6,7 +6,7 @@ require 'dotenv/load'
 class GeneralLoadError < StandardError
     def initialize(msg="General Error")
         set_msg = "message :: #{msg}"
-        super(msg )
+        super(msg)
     end
 end
 
@@ -43,7 +43,8 @@ class Manager
             raise GeneralLoadError, "#{type} load Error - '#{name}'"
             return false
         end
-        p "#{type} - #{name} Loaded"
+        
+        ap "[#{type}] #{name} Loaded"
         return true
     end
 end  

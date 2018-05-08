@@ -1,0 +1,7 @@
+{
+    "server_host" : "example.com",
+    "server_user" : "example",
+    "server_pass" : "12341234",
+    "install_infra_dest" : "/home/example/",
+    "app_deployment_dest" : "/home/example/apps/"
+}
