@@ -23,7 +23,7 @@ class Cli < BaseAppModule
     end
 
     def deploy_app_container_init(app)
-        s = "cd /home/rubyrain/infra/app/#{app} ; git checkout master -f ; git pull ;  docker build -t app_image . ; docker rm -f green ;  docker run -itd --network base_network --name blue --hostname blue app_image; docker run --network base_network -itd --name green --hostname green app_image ; docker exec green bash -c echo 'green' > /etc/env; cat /etc/env' ; docker exec blue bash -c echo 'blue' > /etc/env; "
+        s = "cd /home/rubyrain/infra/app/#{app} ; git checkout master -f ; git pull ;  docker build -t app_image . ; docker rm -f green ;  docker run -itd --network base_network --name blue --hostname blue app_image; docker run --network base_network -itd --name green --hostname green app_image ; docker exec green bash -c echo 'green' > /etc/env;  docker exec blue bash -c echo 'blue' > /etc/env; "
         self.connect_server(s)
     end
 
