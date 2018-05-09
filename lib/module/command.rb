@@ -28,7 +28,7 @@ class Cli < BaseAppModule
     end
 
     def deploy_app_container(app)
-        s = "cd /home/rubyrain/infra/app/#{app} ; git checkout master -f ; git pull ;  docker build -t app_image . ; docker rm -f green ;  docker run -itd --network base_network --name green --hostname green app_image; docker exec green bash -c 'echo green > /etc/env'; "
+        s = "cd /home/rubyrain/infra/app/#{app} ; git checkout master -f ; git pull ;  docker build -t app_image . ; set_container_name=$(sh /home/rubyrain/infra/host/update_green) ;  docker run -itd --network base_network --name $set_container_name --hostname $set_container_name app_image; docker exec $set_container_name bash -c 'echo green > /etc/env'; "
         self.connect_server(s)
     end
     def deploy_loadbalancer()

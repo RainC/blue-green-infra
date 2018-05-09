@@ -1,0 +1,12 @@
+#!/bin/bash
+
+container_green=$(docker exec green cat /etc/env)
+container_blue=$(docker exec blue cat /etc/env)
+
+if [[ $container_blue = "green" ]]; then
+    docker rm -f blue
+fi
+
+if [[ $container_green = "green" ]]; then
+    docker rm -f green
+fi
