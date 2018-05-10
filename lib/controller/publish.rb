@@ -4,7 +4,7 @@ class Publish < BaseAppController
         # blue to green
         p "Switching Process.."
         module_load("command")
-        m = Cli.new(@env)
+        m = Command.new(@env)
         m.switch_container()
     end 
     

@@ -1,4 +1,4 @@
-class Cli < BaseAppModule
+class Command < BaseAppModule
     def connect_server(join_deploy)
         begin
             if @cli_env["connect_method"] == "password"
