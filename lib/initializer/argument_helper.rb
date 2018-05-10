@@ -65,6 +65,7 @@ class ArgumentHelper
         p "-------------------------"
         p "Cli options"
         p "ruby manager.rb deploy"
+        p "ruby manager.rb deploy init"
         p "ruby manager.rb publish"
     end
 

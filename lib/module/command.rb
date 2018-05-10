@@ -27,12 +27,12 @@ class Command < BaseAppModule
     end
 
     def deploy_app_container_init()
-        s = "cd  #{@cli_env["install_infra_dest"]}/infra  ; git checkout master -f ; git pull ; cd #{@cli_env["app_deployment_dest"]}/#{@cli_env["app_target"]};  docker build -t app_image . ; docker rm -f front_nginx ;  docker rm -f blue; docker rm -f green ;  docker run -itd --network base_network --name blue --hostname blue app_image; docker run --network base_network -itd --name green --hostname green app_image ; docker exec green bash -c 'echo green > /etc/env'; docker exec blue bash -c 'echo blue > /etc/env'; "
+        s = "cd  #{@cli_env["install_infra_dest"]}/infra  ; git checkout master -f ; git pull ; cd #{@cli_env["app_deployment_dest"]}/#{@cli_env["app_target"]};  docker build --build-arg repourl=#{@cli_env["app_repo"] }  -t app_image . ; docker rm -f front_nginx ;  docker rm -f blue; docker rm -f green ;  docker run -itd --network base_network --name blue --hostname blue app_image; docker run --network base_network -itd --name green --hostname green app_image ; docker exec green bash -c 'echo green > /etc/env'; docker exec blue bash -c 'echo blue > /etc/env'; "
         self.connect_server(s)
     end
 
     def deploy_app_container()
-        s = "cd #{@cli_env["install_infra_dest"]}/infra  git checkout master -f ; git pull ; cd #{@cli_env["app_deployment_dest"]}/#{@cli_env["app_target"]} ; docker build --no-cache -t app_image . ; set_container_name=$(sh #{@cli_env["install_infra_dest"]}/infra/host/update_green) ;  docker run -itd --network base_network --name $set_container_name --hostname $set_container_name app_image; docker exec $set_container_name bash -c 'echo green > /etc/env'; "
+        s = "cd #{@cli_env["install_infra_dest"]}/infra  git checkout master -f ; git pull ; cd #{@cli_env["app_deployment_dest"]}/#{@cli_env["app_target"]} ; docker build --build-arg repourl=#{@cli_env["app_repo"] } --no-cache -t app_image . ; set_container_name=$(sh #{@cli_env["install_infra_dest"]}/infra/host/update_green) ;  docker run -itd --network base_network --name $set_container_name --hostname $set_container_name app_image; docker exec $set_container_name bash -c 'echo green > /etc/env'; "
         self.connect_server(s)
     end
     def deploy_loadbalancer()
@@ -61,7 +61,7 @@ class Command < BaseAppModule
         selection["ubuntu"] = ubuntu_install_docker
         selection["ami"] = ami_install_docker
 
-        s = "cd #{@cli_env["install_infra_dest"]} ; git clone https://github.com/rainc/infra; #{selection[@cli_env["os"]]}"
+        s = "cd #{@cli_env["install_infra_dest"]} ; git clone #{@cli_env["infra_repo"]}; #{selection[@cli_env["os"]]}"
         self.connect_server(s)
     end
 
