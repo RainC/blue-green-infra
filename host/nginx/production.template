@@ -1,8 +1,8 @@
 upstream active {
-    server ${ACTIVE}:8080;
+    server ${ACTIVE}:5000;
 }
 upstream standby {
-    server ${STANDBY}:8080;
+    server ${STANDBY}:5000;
 }
 
 server {
