@@ -21,8 +21,22 @@ class ArgumentHelper
         if @options[0] == "help"
             process_help
         end
+    
+        if @options[0] == "construct"
+            process_construct
+        end
+
     end
     
+    def process_construct
+        if @m.load("controller", "infra") == true
+            m = Infra.new(@env)
+        else 
+            raise GeneralLoadError
+        end
+
+    end
+
     def process_deploy
         if @m.load("controller","deploy") == true
             if @options[1] == "loadbalancer" 

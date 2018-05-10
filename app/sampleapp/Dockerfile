@@ -1,1 +1,1 @@
-FROM heroku/nodejs-hello-world
+FROM nginx

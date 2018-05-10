@@ -1,7 +1,5 @@
 class Deploy < BaseAppController
-    def TestMethod
-        p "Deployment Controller Initalized"
-    end
+   
 
     def do_deploy(opt)
         # remove green container
