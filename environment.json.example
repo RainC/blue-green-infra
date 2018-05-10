@@ -1,10 +1,12 @@
 {
     "server_name" : "example.com",
-    "server_user" : "exuser",
-    "server_pass" : "example",
-    "install_infra_dest" : "/home/exuser/",
-    "app_deployment_dest" : "/home/exuser/apps/",
+    "server_user" : "ec2-user",
+    "connect_method" : "keyfile",
+    "keyfile" : "./deployment.pem",
+    "install_infra_dest" : "/home/ec2-user",
+    "app_deployment_dest" : "/home/ec2-user/infra/app",
     "app_target" : "sampleapp",
-    "app_publish_port" : "3000",
-    "os" : "centos"
+    "app_publish_port" : "80",
+    "network" : "base_network",
+    "os" : "ami"
 }
