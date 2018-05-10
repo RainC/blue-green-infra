@@ -1,1 +1,1 @@
-FROM nginx:1.9
+FROM alfio/alf.io
