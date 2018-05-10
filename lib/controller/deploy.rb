@@ -3,22 +3,22 @@ class Deploy < BaseAppController
         p "Deployment Controller Initalized"
     end
 
-    def do_deploy(init=false, appname="sampleapp")
+    def do_deploy(opt)
         # remove green container
         # new green container
         # if init process, make blue, green container 
 
         module_load("command")
-        m = Cli.new(@host,@user,@pass)
-        if init == "init" 
+        m = Cli.new(@env)
+        if opt == "init" 
             p "Deploy init .. - Network "
             m.construct_network()
             p "Deploy init process.. "
-            m.deploy_app_container_init("sampleapp") # Blue/Green Deploy for Lb
+            m.deploy_app_container_init() # Blue/Green Deploy for Lb
             p "Deploy loadbalancer.. "
             m.deploy_loadbalancer() # LB Deploy
         else
-            m.deploy_app_container("sampleapp") # Green Deploy
+            m.deploy_app_container() # Green Deploy
         end
     end
 
@@ -26,8 +26,8 @@ class Deploy < BaseAppController
 
         p "Deploy Green container.. "
         module_load("command")
-        m = Cli.new(@host,@user,@pass)
-        m.deploy_app_container("sampleapp")
+        m = Cli.new(@env)
+        m.deploy_app_container()
     end 
 
 
@@ -35,13 +35,11 @@ class Deploy < BaseAppController
         # LB init Process
         p "Deploy LB.. "
         module_load("command")
-        m = Cli.new(@host,@user,@pass)
+        m = Cli.new(@env)
         m.deploy_loadbalancer()
     end
 
-    def initialize(host,user,pass)
-        @host = host
-        @user = user
-        @pass = pass
+    def initialize(env)
+        @env = env
     end
 end 

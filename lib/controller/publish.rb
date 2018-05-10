@@ -4,13 +4,11 @@ class Publish < BaseAppController
         # blue to green
         p "Switching Process.."
         module_load("command")
-        m = Cli.new(@host,@user,@pass)
+        m = Cli.new(@env)
         m.switch_container()
     end 
     
-    def initialize(host,user,pass)
-        @host = host
-        @user = user
-        @pass = pass
+    def initialize(env)
+        @env = env
     end
 end

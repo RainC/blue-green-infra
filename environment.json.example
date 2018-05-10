@@ -1,7 +1,10 @@
 {
-    "server_host" : "example.com",
-    "server_user" : "example",
-    "server_pass" : "12341234",
-    "install_infra_dest" : "/home/example/",
-    "app_deployment_dest" : "/home/example/apps/"
+    "server_name" : "example.com",
+    "server_user" : "exuser",
+    "server_pass" : "example",
+    "install_infra_dest" : "/home/exuser/",
+    "app_deployment_dest" : "/home/exuser/apps/",
+    "app_target" : "sampleapp",
+    "app_publish_port" : "3000",
+    "os" : "centos"
 }

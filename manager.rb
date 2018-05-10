@@ -2,6 +2,7 @@ require 'net/ssh'
 require 'awesome_print'
 require 'abstract_method'
 require 'dotenv/load' 
+require 'json'
 
 class GeneralLoadError < StandardError
     def initialize(msg="General Error")
