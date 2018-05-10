@@ -228,3 +228,5 @@ curl exmaple.com/stage
 Hello World!
 ```
 
+# Program 간단한 아키텍쳐
+![](https://i.imgur.com/K9gHfJZ.png)
