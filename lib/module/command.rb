@@ -4,7 +4,7 @@ class Command < BaseAppModule
             if @cli_env["connect_method"] == "password"
                 ssh = Net::SSH.start(@cli_env["server_name"], @cli_env["server_user"] , :password => @cli_env["server_pass"]) 
             else
-                ssh = Net::SSH.start(@cli_env["server_name"], @cli_env["server_user"] , :host_key => "ssh-rsa", :encryption  => "blowfish-cbc" , :keys => [  @cli_env["keyfile"] ]  ) 
+                ssh = Net::SSH.start(@cli_env["server_name"], @cli_env["server_user"]  , :keys => [  @cli_env["keyfile"] ] ) 
             end
             ssh.exec!(join_deploy) do
                 |ch, stream, line|
@@ -53,8 +53,8 @@ class Command < BaseAppModule
     end
 
     def install_infrastructure()
-        centos_install_docker = "sudo yum install -y yum-utils device-mapper-persistent-data lvm2;sudo yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo ; sudo yum install docker-ce -y ; sudo systemctl start docker ; sudo systemctl enable docker"
-        ubuntu_install_docker = "sudo apt-get update -y ; sudo apt-get install apt-transport-https ca-certificates curl software-properties-common; curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -; sudo apt-key fingerprint 0EBFCD88; sudo add-apt-repository \"deb [arch=amd64] https://download.docker.com/linux/ubuntu  $(lsb_release -cs) stable\"; sudo apt-get update ; sudo apt-get install docker-ce -y ; sudo usermod -aG docker $USER "
+        centos_install_docker = "sudo yum install -y yum-utils device-mapper-persistent-data lvm2;sudo yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo ; sudo yum install docker-ce -y ; sudo systemctl start docker  ; sudo systemctl enable docker ;  sudo usermod -aG docker #{@cli_env["server_user"]};"
+        ubuntu_install_docker = "sudo apt-get update -y ; sudo apt-get install apt-transport-https ca-certificates curl software-properties-common -y ; curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -; sudo apt-key fingerprint 0EBFCD88; sudo add-apt-repository \"deb [arch=amd64] https://download.docker.com/linux/ubuntu  $(lsb_release -cs) stable\"; sudo apt-get update ; sudo apt-get install docker-ce -y ; sudo usermod -aG docker $USER "
         ami_install_docker = "sudo yum update -y ; sudo yum install -y git docker; sudo usermod -aG docker #{@cli_env["server_user"]}; sudo service docker start "
         selection = Hash.new
         selection["centos"] = centos_install_docker

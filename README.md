@@ -2,11 +2,12 @@
 auto deployment infra App based Docker 
 
 # Features 
-- Deployable to Standby
+- Deployable to green (Staging container)
 - Switchable Green-Blue Deployment
+- Accessable to Stage
 
 # Purpose
-- High-availability Application , Scalable Application
+- High-availability Application 
 - Easy to use for Developers
 - more Less infrastructure works
 - just programming practice and make better deployment environment
