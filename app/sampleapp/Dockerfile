@@ -1,1 +1,1 @@
-FROM alfio/alf.io
+FROM google/nodejs-hello
