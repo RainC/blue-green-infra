@@ -193,7 +193,14 @@ Successfully built 73a103a3cfa2
 Successfully tagged app_image:latest
 f5f601735728d377299334b40133585f20c01dbd2619d5f58f4cbb723ffa657c
 ```
-- 이렇게 나오고 example.com/stage 에 접속이 된다면 안전하게 배포가 된 것입니다.
+- 이렇게 나오고 example.com/stage 에 접속이 된다면 안전하게 배포가 된 것입니다. 그래도 혹시나 모르니 확인해 봅시다.
+```
+curl example.com/
+Hello World!
+
+curl example.com/stage
+TINY rubyrain
+```
 - 만약 오류가 난다면, 서버 에서 `docker logs green` 을 통해 마지막으로 발생한 오류를 찾아 냅니다. 거의 `syntax` 오류일 겁니다. 고쳐서 다시 커밋 후 배포하면 됩니다. 이 상황이 실제로 일어나도 실 운영에 영향을 미치지 않습니다. 이게 제일 핵심입니다!!!
 - 배포가 안전하게 끝났다면 example.com/ 으로 배포가 되어야 합니다. 아래 명령어를 통해 스위치 합니다.
 ```
