@@ -1,8 +1,8 @@
 upstream active {
-    server ${ACTIVE}:5000;
+    server ${ACTIVE}:3000;
 }
 upstream standby {
-    server ${STANDBY}:5000;
+    server ${STANDBY}:3000;
 }
 
 server {
