@@ -32,7 +32,7 @@ class Command < BaseAppModule
     end
 
     def deploy_app_container()
-        s = "cd #{@cli_env["install_infra_dest"]} ; git checkout master -f ; git pull ;  docker build -t app_image . ; set_container_name=$(sh #{@cli_env["install_infra_dest"]}/infra/host/update_green) ;  docker run -itd --network base_network --name $set_container_name --hostname $set_container_name app_image; docker exec $set_container_name bash -c 'echo green > /etc/env'; "
+        s = "cd #{@cli_env["install_infra_dest"]}/infra  git checkout master -f ; git pull ; cd #{@cli_env["app_deployment_dest"]}/#{@cli_env["app_target"]} ; docker build --no-cache -t app_image . ; set_container_name=$(sh #{@cli_env["install_infra_dest"]}/infra/host/update_green) ;  docker run -itd --network base_network --name $set_container_name --hostname $set_container_name app_image; docker exec $set_container_name bash -c 'echo green > /etc/env'; "
         self.connect_server(s)
     end
     def deploy_loadbalancer()
@@ -44,10 +44,11 @@ class Command < BaseAppModule
         s = "docker network rm #{@cli_env["network"]}; docker network create #{@cli_env["network"]}"
         self.connect_server(s)
     end
+    
     def switch_container
         # Auto Switch from LB Container
         container_label_switch = "bash -c 'if [[ $(cat /etc/env | grep \"green\") = \"green\" ]]; then echo blue > /etc/env ; else echo green > /etc/env ;fi'"
-        s = "cd /home/rubyrain/infra/host/nginx/ ; git checkout master -f ; docker exec blue #{container_label_switch} ; docker exec green #{container_label_switch} ;  git pull ;docker exec front_nginx bash -c '/etc/nginx/switch'"
+        s = "cd #{@cli_env["install_infra_dest"]}/infra ; git checkout master -f ; docker exec blue #{container_label_switch} ; docker exec green #{container_label_switch} ;  git pull ;docker exec front_nginx bash -c '/etc/nginx/switch'"
         self.connect_server(s)
     end
 
