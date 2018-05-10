@@ -1,1 +1,1 @@
-FROM google/nodejs-hello
+FROM heroku/nodejs-hello-world
