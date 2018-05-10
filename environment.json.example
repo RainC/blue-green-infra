@@ -8,5 +8,7 @@
     "app_target" : "sampleapp",
     "app_publish_port" : "80",
     "network" : "base_network",
-    "os" : "ami"
+    "os" : "ami",
+    "infra_repo" : "https://github.com/rainc/infra",
+    "app_repo" : "https://github.com/rainc/rubyapp"
 }

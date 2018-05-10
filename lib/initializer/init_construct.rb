@@ -8,7 +8,7 @@ class InitConstruct
         selection["ubuntu"] = ubuntu_install_docker
         selection["ami"] = ami_install_docker
 
-        s = "cd #{@cli_env["install_infra_dest"]} ; git clone https://github.com/rainc/infra; #{selection[@cli_env["os"]]}"
+        s = "cd #{@cli_env["install_infra_dest"]} ; git clone #{@cli_env["infra_repo"]} ; #{selection[@cli_env["os"]]}"
         self.connect_server(s)
     end
 end

@@ -27,7 +27,7 @@ class Command < BaseAppModule
     end
 
     def deploy_app_container_init()
-        s = "cd  #{@cli_env["install_infra_dest"]}/infra  ; git checkout master -f ; git pull ; cd #{@cli_env["app_deployment_dest"]}/#{@cli_env["app_target"]};  docker build --build-arg repourl=#{@cli_env["app_repo"] }  -t app_image . ; docker rm -f front_nginx ;  docker rm -f blue; docker rm -f green ;  docker run -itd --network base_network --name blue --hostname blue app_image; docker run --network base_network -itd --name green --hostname green app_image ; docker exec green bash -c 'echo green > /etc/env'; docker exec blue bash -c 'echo blue > /etc/env'; "
+        s = "cd  #{@cli_env["install_infra_dest"]}/infra  ; git checkout master -f ; git pull ; cd #{@cli_env["app_deployment_dest"]}/#{@cli_env["app_target"]};     docker build --no-cache --build-arg repourl=#{@cli_env["app_repo"] }  -t app_image . ; docker rm -f front_nginx ;  docker rm -f blue; docker rm -f green ;  docker run -itd --network base_network --name blue --hostname blue app_image; docker run --network base_network -itd --name green --hostname green app_image ; docker exec green bash -c 'echo green > /etc/env'; docker exec blue bash -c 'echo blue > /etc/env'; "
         self.connect_server(s)
     end
 
