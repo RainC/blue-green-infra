@@ -32,7 +32,7 @@ class Command < BaseAppModule
     end
 
     def deploy_app_container()
-        s = "cd #{@cli_env["app_target"]} ; git checkout master -f ; git pull ;  docker build -t app_image . ; set_container_name=$(sh #{@cli_env["install_infra_dest"]}/infra/host/update_green) ;  docker run -itd --network base_network --name $set_container_name --hostname $set_container_name app_image; docker exec $set_container_name bash -c 'echo green > /etc/env'; "
+        s = "cd #{@cli_env["install_infra_dest"]} ; git checkout master -f ; git pull ;  docker build -t app_image . ; set_container_name=$(sh #{@cli_env["install_infra_dest"]}/infra/host/update_green) ;  docker run -itd --network base_network --name $set_container_name --hostname $set_container_name app_image; docker exec $set_container_name bash -c 'echo green > /etc/env'; "
         self.connect_server(s)
     end
     def deploy_loadbalancer()
