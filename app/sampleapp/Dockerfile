@@ -5,4 +5,4 @@ RUN git clone https://github.com/rainc/rubyapp
 RUN rm -rf /app/rubyapp/Gemfile.lock
 WORKDIR /app/rubyapp
 RUN bundle install
-CMD rackup -p 4567
+CMD rackup -p 4567 --host 0.0.0.0
