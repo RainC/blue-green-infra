@@ -19,21 +19,20 @@ end
 class BaseAppController
     abstract_method :initialize
     def module_load(module_name)
-        p "Module Load Request - #{module_name}"
+        p "Module load request from #{self.class.name} controller - #{module_name}"
         require "#{File.dirname(File.realpath(__FILE__))}/lib/module/#{module_name}.rb"
     end 
 end
 
 class Manager
     def initialize
-        self.load("module","command")
         self.load("initializer","argument_helper")
         options = ARGV
         ArgumentHelper.new(options, self, ENV)
     end
 
     def load(type,name)
-        fileload(type,name)
+        fileload(type,name)  
     end
 
     private
@@ -44,11 +43,10 @@ class Manager
             raise GeneralLoadError, "#{type} load Error - '#{name}'"
             return false
         end
-        
         ap "[#{type}] #{name} Loaded"
         return true
     end
-end  
+end
 
 
 Manager.new

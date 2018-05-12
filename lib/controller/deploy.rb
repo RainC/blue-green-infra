@@ -28,7 +28,6 @@ class Deploy < BaseAppController
         m.deploy_app_container()
     end 
 
-
     def do_deploy_lb()
         # LB init Process
         p "Deploy LB.. "
@@ -37,7 +36,14 @@ class Deploy < BaseAppController
         m.deploy_loadbalancer()
     end
 
-    def initialize(env)
+    def initialize(options, env) 
         @env = env
+
+        if options[1] == "loadbalancer"
+            self.do_deploy_lb() # must be prepared Blue/Green container 
+        else
+            self.do_deploy(options[1])
+        end
+
     end
 end 

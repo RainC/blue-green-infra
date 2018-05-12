@@ -1,4 +1,4 @@
-class Infra < BaseAppController
+class Construct < BaseAppController
     def do_init() 
         module_load("command")
         m = Command.new(@env)
@@ -6,7 +6,7 @@ class Infra < BaseAppController
     end
 
 
-    def initialize(env)
+    def initialize(options,env)
         @env = env
         self.do_init
     end

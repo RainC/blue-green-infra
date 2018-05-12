@@ -8,7 +8,8 @@ class Publish < BaseAppController
         m.switch_container()
     end 
     
-    def initialize(env)
+    def initialize(options,env)
         @env = env
+        self.switch
     end
 end
