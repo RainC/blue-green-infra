@@ -4,6 +4,8 @@ require 'abstract_method'
 require 'dotenv/load' 
 require 'json'
 
+
+
 class GeneralLoadError < StandardError
     def initialize(msg="General Error")
         set_msg = "message :: #{msg}"
@@ -19,9 +21,13 @@ end
 class BaseAppController
     abstract_method :initialize
     def module_load(module_name)
-        p "Module load request from #{self.class.name} controller - #{module_name}"
+        ap "Module load request from #{self.class.name} controller - #{module_name}"
         require "#{File.dirname(File.realpath(__FILE__))}/lib/module/#{module_name}.rb"
-    end 
+    end
+    def file_load(path)
+        ap "File load request from #{self.class.name} controller - #{path}"
+        require "#{File.dirname(File.realpath(__FILE__))}/#{path}"
+    end
 end
 
 class Manager

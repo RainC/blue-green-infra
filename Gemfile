@@ -5,4 +5,6 @@ source 'https://rubygems.org' do
     gem 'abstract_method'
     gem 'dotenv'
     gem 'json'
+    gem 'sinatra'
+    gem 'sinatra-basic-auth'
 end
