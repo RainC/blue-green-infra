@@ -110,6 +110,60 @@
           .border-top { border-top: 1px solid #e5e5e5; }
           .border-bottom { border-bottom: 1px solid #e5e5e5; }
           .top_blank { padding-top: 30px;}
+
+          .app_status {
+    width: 600px;
+    height: 349px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.container {
+    width: 150px;
+    height: 150px;
+    border-radius: 150px;
+    border: 1px solid #000;
+    text-align: left;
+}
+
+.circles_app .container {float: left;} 
+
+
+.circles_app {
+    display: inline-block;
+    width: 100%;
+    height: 190px;
+}
+
+ 
+.container {
+    float: left;
+    position: relative;
+}
+.container.blue {
+    float:right;
+}
+.container.green {
+    float: right;
+}
+p.container_label {
+    position: absolute;
+    bottom: 96;
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+    left: 0;
+    right: 0;
+    margin-bottom: 19px;
+}
+p.container_label.label_status {
+    bottom: 13px;
+}
+.detail-log {
+    height : 230px;
+    margin-top:20px;
+}
+
           </style>
 </head>
 <body cz-shortcut-listen="true">
@@ -150,29 +204,38 @@
 
     <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4"><div class="chartjs-size-monitor" style="position: absolute; left: 0px; top: 0px; right: 0px; bottom: 0px; overflow: hidden; pointer-events: none; visibility: hidden; z-index: -1;"><div class="chartjs-size-monitor-expand" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;"><div style="position:absolute;width:1000000px;height:1000000px;left:0;top:0"></div></div><div class="chartjs-size-monitor-shrink" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;"><div style="position:absolute;width:200%;height:200%;left:0; top:0"></div></div></div>
         <div class="top_blank"</div>
-        <h2>Section title</h2>
-        <div class="table-responsive">
-        <table class="table table-striped table-sm">
-            <thead>
-            <tr>
-                <th>#</th>
-                <th>Header</th>
-                <th>Header</th>
-                <th>Header</th>
-                <th>Header</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr>
-                <td>1,001</td>
-                <td>Lorem</td>
-                <td>ipsum</td>
-                <td>dolor</td>
-                <td>sit</td>
-            </tr>
-            
-            </tbody>
-        </table>
+        <h2>App status</h2>
+        <div class="app_status">
+            <div class="circles">
+                <div class="circles_app">
+                    
+                
+                    <div class="container blue">
+                            <p class="container_label label_status">Status: Not-Created</p>
+                        <p class="container_label">Blue Container</p>      
+                    </div>
+                    <div class="container lb">
+                            <p class="container_label label_status">Status: Not-Created</p>
+                            <p class="container_label">Loadbalancer</p>        
+                        </div>
+                </div>
+                <div class="circles_lb">
+                        <div class="container green">
+                                <p class="container_label label_status">Status: Not-Created</p>
+                                <p class="container_label">Green Container</p>
+                            </div>
+                    <span class="arrow test_2">
+
+
+                    </span>
+                    
+                </div>
+            </div> 
+        </div>
+        <h2>Last Deployment Log Details</h2>
+        <textarea class="form-control detail-log" readonly="true"></textarea>
+
+
         </div>
     </main>
     </div>
