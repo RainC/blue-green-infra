@@ -38,21 +38,41 @@
 ```
 gem install bundler
 ```
-- Repository 를 fork 해주세요. 
-```
-https://github.com/RainC/rubyapp/
-```
-![](https://i.imgur.com/LCPag2a.png)
 
 - 패캐지 다운로드
 ```
 bundle install
 ```
-- deployment.json.example 이름 변경 (윈도우는 move)
+- environment.json.example 이름 변경 (윈도우는 move)
 ```
-mv deployment.json.example deployment.json
+mv environment.json.example environment.json
 ```
-- deployment.json 편집
+
+- 서버 - Sample App 환경을 위한 Dockerfile 작성
+```
+ssh ec2-user@your-server.com
+```
+- 서버 - `~/app_dest/sampleapp` 이라는 폴더 생성
+```
+mkdir -p /home/ec2-user/app_dest/sampleapp/; cd /home/ec2-user/app_dest/sampleapp
+```
+- 서버 - Dockerfile 작성 *Build script 작성 가이드, 아래는 샘플.
+- 아래와 같이 작성하면 environment.json 에서 해당 `Dockerfile` 을 찾을 수 있게 `environment.json` 파일의 `app_deployment_dest` 설정을 잘 맞춰 줘야 함.
+```
+vim Dockerfile
+```
+```
+FROM ruby
+RUN mkdir -p /app
+WORKDIR /app/
+RUN git clone https://github.com/rainc/rubyapp
+RUN rm -rf /app/rubyapp/Gemfile.lock
+WORKDIR /app/rubyapp
+RUN bundle install
+CMD rackup -p 4567 --host 0.0.0.0
+```
+
+- environment.json 편집
 ```
 {
     "server_name" : "ip",
