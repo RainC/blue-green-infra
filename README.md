@@ -55,19 +55,18 @@ mv deployment.json.example deployment.json
 - deployment.json 편집
 ```
 {
-    "server_name" : "example.com",
+    "server_name" : "ip",
     "server_user" : "ec2-user",
-    "server_pass" : "만약 패스워드 연결 방식일경우 채우기"
-    "connect_method" : "password or keyfile",
-    "keyfile" : "./개인키 경로 입력",
+    "connect_method" : "keyfile",
+    "keyfile" : "./keyfile.pem",
     "install_infra_dest" : "/home/ec2-user",
-    "app_deployment_dest" : "/home/ec2-user/infra/app",
+    "app_deployment_dest" : "/home/ec2-user/app_dest",
     "app_target" : "sampleapp",
-    "app_publish_port" : "80",
-    "network" : "base_network",
+    "app_publish_port" : "4567",
+    "app_name" : "samplerubyapp",
+    "loadbalancer_port" : "8063", 
     "os" : "ami",
-    "infra_repo" : "https://github.com/rainc/infra",
-    "app_repo" : "https://github.com/<Your-forked-id>/rubyapp"
+    "infra_repo" : "https://github.com/rainc/infra"
 }
 ```
 - attributes 설명
@@ -81,10 +80,11 @@ mv deployment.json.example deployment.json
     - `install_infra_dest` : 인프라 설치 위치
     - `app_deployment_dest` : 어플리케이션 보관 위치
     - `app_target` : 배포할 앱 선택
-    - `network` : `base_network` 값 유지 
+    - `app_publish_port` : 앱 서버의 내부 포트 입력
+    - `app_name` : 앱 이름 입력 (사용자가 지정 해줘야함)
+    - `loadbalancer_port` : 0.0.0.0:XXXX 형식으로 바인딩, 즉 example.com:XXXX 에 쓰일 포트 입력
     - `os` : `ami` - Amazon Linux 일 경우 ami ,CentOS 는 `centos` , Ubuntu 일 경우 `ubuntu`
     - `infra_repo` : 기존 값 유지
-    - `app_repo` : 자신이 fork 한 Repository 입력
 - 초기 서버 구성
     - Docker 를 설치해주고, 서버에 인프라 Repository 를 받아 줍니다.
 ```

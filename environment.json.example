@@ -4,7 +4,7 @@
     "connect_method" : "keyfile",
     "keyfile" : "./keyfile.pem",
     "install_infra_dest" : "/home/ec2-user",
-    "app_deployment_dest" : "/home/ec2-user/infra/app",
+    "app_deployment_dest" : "/home/ec2-user/app_dest",
     "app_target" : "sampleapp",
     "app_publish_port" : "4567",
     "app_name" : "samplerubyapp",
