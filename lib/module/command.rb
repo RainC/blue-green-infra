@@ -76,7 +76,7 @@ class Command < BaseAppModule
         s = "cd #{@cli_env["install_infra_dest"]}/infra ; git checkout master -f ; 
         docker exec #{@cli_env["app_name"]}_blue #{container_label_switch} ; 
         docker exec #{@cli_env["app_name"]}_green #{container_label_switch} ;  
-        git pull ;docker exec -e blueset=#{@cli_env["app_name"]}_blue -e greenset=#{@cli_env["app_name"]}_green #{@cli_env["app_name"]}_proxy bash -c '/etc/nginx/switch'"
+        git pull ;docker exec #{@cli_env["app_name"]}_proxy bash -c '/etc/nginx/switch #{@cli_env["app_name"]}_blue #{@cli_env["app_name"]}_green'"
         self.connect_server(s)
     end
 
