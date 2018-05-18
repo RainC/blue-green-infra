@@ -35,6 +35,7 @@
 ## 준비 과정
 - 아래 내용은 Local PC 에서 진행합니다. 
 - packages 설치를 위한 bundler 를 먼저 설치 해줍니다.
+- repo fork 하는 쪽에  문서 오류가 있습니다. 곧 수정해서 반영하겠습니다. 내부 오류는 아닙니다.
 ```
 gem install bundler
 ```
