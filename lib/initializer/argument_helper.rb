@@ -1,11 +1,17 @@
 class ArgumentHelper
     def initialize(options, m, env)
-        file = File.read('./environment.json')
-        json_data = JSON.parse(file)
-        @options = options
-        @manager = m
-        @env = json_data
-        self.argument_parse()
+        begin
+            file = File.read('./environment.json')
+            json_data = JSON.parse(file)
+            @options = options
+            @manager = m
+            @env = json_data
+            self.argument_parse()
+        rescue
+            raise GeneralLoadError.new("you must set environment.json using example file.")
+        end
+
+        
     end
 
     def argument_parse()
