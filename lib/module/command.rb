@@ -89,7 +89,7 @@ class Command < BaseAppModule
         selection["ubuntu"] = ubuntu_install_docker
         selection["ami"] = ami_install_docker
 
-        s = "#{selection[@cli_env["os"]]}; mkdir -p #{@cli_env["install_infra_dest"]}; cd #{@cli_env["install_infra_dest"]} ;  git clone #{@cli_env["infra_repo"]} ;"
+        s = "#{selection[@cli_env["os"]]}; mkdir -p #{@cli_env["install_infra_dest"]}; mkdir -p #{@cli_env["app_deployment_dest"]};  cd #{@cli_env["install_infra_dest"]} ;  git clone #{@cli_env["infra_repo"]} ;"
         self.connect_server(s)
     end
 
